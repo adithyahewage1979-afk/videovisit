@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lanka Video Store - ඔබ කැමති වීඩියෝ තෝරා WhatsApp හරහා ඇණවුම් කරන්න.">
+  <title>Lanka Video Store</title>
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #141e30;
+      --green: #16c784;
+      --muted: #a7b4c8;
+      --border: #28354a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #f5f7ff;
+      background: var(--bg);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      padding: 20px 6%;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 900;
+      text-decoration: none;
+      color: white;
+    }
+
+    .logo span {
+      color: var(--green);
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: var(--green);
+    }
+
+    .hero {
+      padding: 70px 7%;
+      background: linear-gradient(120deg, #123d39, #10182b 75%);
+    }
+
+    .hero small {
+      color: var(--green);
+      letter-spacing: 2px;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 6vw, 60px);
+      margin: 18px 0;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      color: #c2cede;
+      line-height: 1.8;
+    }
+
+    button {
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .primary {
+      display: inline-block;
+      border: none;
+      border-radius: 8px;
+      padding: 13px 20px;
+      background: var(--green);
+      color: #061b12;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .primary:hover {
+      background: #49e5a4;
+    }
+
+    .tools {
+      display: flex;
+      gap: 12px;
+      padding: 25px 6% 0;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      color: white;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    select {
+      max-width: 200px;
+    }
+
+    main {
+      padding: 30px 6% 60px;
+    }
+
+    .heading p,
+    .description {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 25px;
+    }
+
+    .card {
+      overflow: hidden;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .thumb {
+      aspect-ratio: 16 / 9;
+      position: relative;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #244e58, #32294f);
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+    }
+
+    .play {
+      font-size: 48px;
+      color: white;
+    }
+
+    .price {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      padding: 7px 10px;
+      border-radius: 6px;
+      background: #050910e8;
+      font-weight: bold;
+    }
+
+    .info {
+      padding: 17px;
+    }
+
+    .category {
+      color: var(--green);
+      font-size: 13px;
+    }
+
+    .info h3 {
+      margin: 10px 0;
+    }
+
+    .info p {
+      min-height: 42px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .buy {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .empty {
+      color: var(--muted);
+      padding: 25px 0;
+    }
+
+    .contact {
+      margin-top: 50px;
+      padding: 25px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    footer {
+      padding: 25px;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      header {
+        padding: 18px 5%;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      nav a {
+        font-size: 14px;
+      }
+
+      .hero {
+        padding: 45px 5%;
+      }
+
+      .tools {
+        padding: 20px 5% 0;
+        flex-direction: column;
+      }
+
+      select {
+        max-width: none;
+      }
+
+      main {
+        padding: 25px 5% 45px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a class="logo" href="#">LANKA <span>VIDEO</span></a>
+
+    <nav>
+      <a href="#">Home</a>
+      <a href="#videos">Videos</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <small>YOUR PREMIUM VIDEO LIBRARY</small>
+
+    <h1>ඔයාගේ කැමති වීඩියෝ<br>Online බලන්න.</h1>
+
+    <p>
+      වීඩියෝ තෝරන්න. මිල බලන්න.
+      WhatsApp හරහා ඇණවුම් කරන්න.
+    </p>
+
+    <button class="primary"
+      onclick="document.getElementById('videos').scrollIntoView({behavior:'smooth'})">
+      Explore Videos ↓
+    </button>
+  </section>
+
+  <div class="tools">
+    <input
+      type="search"
+      id="search"
+      placeholder="වීඩියෝ සොයන්න..."
+      aria-label="වීඩියෝ සොයන්න">
+
+    <select id="sort" aria-label="මිල අනුව සකසන්න">
+      <option value="default">Default</option>
+      <option value="low">මිල අඩු සිට</option>
+      <option value="high">මිල වැඩි සිට</option>
+    </select>
+  </div>
+
+  <main>
+    <section id="videos">
+      <div class="heading">
+        <h2>අපේ වීඩියෝ 🎬</h2>
+        <p class="description">
+          කැමති වීඩියෝව තෝරලා Buy Now ක්ලික් කරන්න.
+        </p>
+      </div>
+
+      <div class="grid" id="videoGrid"></div>
+    </section>
+
+    <section class="contact" id="contact">
+      <h2>Contact Us</h2>
+      <p class="description">
+        වීඩියෝ සහ මිලදී ගැනීම් ගැන විමසීමට WhatsApp හරහා සම්බන්ධ වෙන්න.
+      </p>
+
+      <a class="primary" id="contactLink"
+         href="#" target="_blank" rel="noopener">
+        WhatsApp Contact
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Lanka Video Store
+    · All prices in LKR
+  </footer>
+
+  <script>
+    // ඔබගේ සැබෑ WhatsApp අංකය මෙතැන දාන්න.
+    // රටේ කේතය සමඟ, + ලකුණ නැතුව ලියන්න.
+    const WHATSAPP_NUMBER = "94771234567";
+
+    // ඔබගේ වීඩියෝ විස්තර මෙතැන වෙනස් කරන්න.
+    const videos = [
+      {
+        id: 1,
+        title: "Premium Video 01",
+        description: "අලුත්ම Premium Video එක.",
+        price: 500,
+        category: "Premium",
+        thumb: ""
+      },
+      {
+        id: 2,
+        title: "Premium Video 02",
+        description: "විශේෂ වීඩියෝ එකක්.",
+        price: 1000,
+        category: "Premium",
+        thumb: ""
+      },
+      {
+        id: 3,
+        title: "Special Video 03",
+        description: "ඔයා වෙනුවෙන් තෝරාගත් වීඩියෝව.",
+        price: 750,
+        category: "Special",
+        thumb: ""
+      },
+      {
+        id: 4,
+        title: "Exclusive Video 04",
+        description: "Exclusive content.",
+        price: 1500,
+        category: "Exclusive",
+        thumb: ""
+      },
+      {
+        id: 5,
+        title: "Premium Video 05",
+        description: "තවත් වටිනා වීඩියෝවක්.",
+        price: 850,
+        category: "Premium",
+        thumb: ""
+      },
+      {
+        id: 6,
+        title: "Special Video 06",
+        description: "නවතම එකතුවෙන්.",
+        price: 1200,
+        category: "Special",
+        thumb: ""
+      }
+    ];
+
+    const grid = document.getElementById("videoGrid");
+    const search = document.getElementById("search");
+    const sort = document.getElementById("sort");
+
+    function money(price) {
+      return "Rs. " + Number(price).toLocaleString("en-LK");
+    }
+
+    function makeWhatsAppLink(message) {
+      return "https://wa.me/" + WHATSAPP_NUMBER +
+        "?text=" + encodeURIComponent(message);
+    }
+
+    function renderVideos() {
+      const query = search.value.toLowerCase().trim();
+      const sortOrder = sort.value;
+
+      let filtered = videos.filter(video => {
+        const text = (
+          video.title + " " +
+          video.description + " " +
+          video.category
+        ).toLowerCase();
+
+        return text.includes(query);
+      });
+
+      if (sortOrder === "low") {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sortOrder === "high") {
+        filtered.sort((a, b) => b.price - a.price);
+      }
+
+      grid.replaceChildren();
+
+      if (filtered.length === 0) {
+        const empty = document.createElement("p");
+        empty.className = "empty";
+        empty.textContent = "වීඩියෝ හමු වුණේ නැහැ.";
+        grid.appendChild(empty);
+        return;
+      }
+
+      filtered.forEach(video => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        const thumb = document.createElement("div");
+        thumb.className = "thumb";
+
+        const play = document.createElement("span");
+        play.className = "play";
+        play.textContent = "▶";
+        thumb.appendChild(play);
+
+        if (video.thumb) {
+          const img = document.createElement("img");
+          img.src = video.thumb;
+          img.alt = video.title;
+          img.loading = "lazy";
+
+          img.onerror = () => img.remove();
+          thumb.appendChild(img);
+        }
+
+        const price = document.createElement("span");
+        price.className = "price";
+        price.textContent = money(video.price);
+        thumb.appendChild(price);
+
+        const info = document.createElement("div");
+        info.className = "info";
+
+        const category = document.createElement("span");
+        category.className = "category";
+        category.textContent = video.category;
+
+        const title = document.createElement("h3");
+        title.textContent = video.title;
+
+        const desc = document.createElement("p");
+        desc.textContent = video.description;
+
+        const buy = document.createElement("a");
+        buy.className = "primary buy";
+        buy.textContent = "Buy Now";
+        buy.href = makeWhatsAppLink(
+          "Hello! I want to purchase a video.\n" +
+          "Video: " + video.title + "\n" +
+          "Video ID: " + video.id + "\n" +
+          "Price: " + money(video.price) + "\n" +
+          "Please send me the payment instructions."
+        );
+        buy.target = "_blank";
+        buy.rel = "noopener";
+
+        info.append(category, title, desc, buy);
+        card.append(thumb, info);
+        grid.appendChild(card);
+      });
+    }
+
+    search.addEventListener("input", renderVideos);
+    sort.addEventListener("change", renderVideos);
+
+    document.getElementById("contactLink").href =
+      makeWhatsAppLink(
+        "Hello! I would like to know more about your videos."
+      );
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    renderVideos();
+  </script>
+
+</body>
+</html>
